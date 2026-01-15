@@ -1,0 +1,24 @@
+MazeProject/
+│
+├── main.cpp
+├── README.md
+│
+├── core/
+│   ├── Maze.h
+│   ├── Maze.cpp
+│   └── Node.h
+│
+├── generator/
+│   ├── MazeGenerator.h
+│   └── MazeGenerator.cpp
+│
+├── solver/
+│   ├── MazeSolver.h
+│   └── MazeSolver.cpp
+│
+├── utils/
+│   ├── Timer.h
+│   └── Timer.cpp
+│
+└── tests/
+    └── PerformanceTest.cpp
