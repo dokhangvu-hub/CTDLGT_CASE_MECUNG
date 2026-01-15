@@ -5,28 +5,28 @@
 4.Thông qua dự án, nhóm rèn luyện kỹ năng về cấu trúc dữ liệu, giải thuật, làm việc nhóm và đánh giá hiệu năng của các thuật toán tìm kiếm.
 #Cấu trúc bài của nhóm:
 MazeProject/
-│
-├── main.cpp
-├── README.md
-│
-├── core/
-│   ├── Maze.h
-│   ├── Maze.cpp
-│   └── Node.h
-│
-├── generator/
-│   ├── MazeGenerator.h
-│   └── MazeGenerator.cpp
-│
-├── solver/
-│   ├── MazeSolver.h
-│   └── MazeSolver.cpp
-│
-├── utils/
-│   ├── Timer.h
-│   └── Timer.cpp
-│
-└── tests/
+│                                       
+├── main.cpp                             
+├── README.md                              
+│                           
+├── core/                           
+│   ├── Maze.h                    
+│   ├── Maze.cpp                         
+│   └── Node.h                      
+│                      
+├── generator/                      
+│   ├── MazeGenerator.h                         
+│   └── MazeGenerator.cpp                       
+│                                                
+├── solver/                            
+│   ├── MazeSolver.h                           
+│   └── MazeSolver.cpp                       
+│                              
+├── utils/                        
+│   ├── Timer.h                           
+│   └── Timer.cpp                     
+│                                   
+└── tests/                            
     └── PerformanceTest.cpp
 5.Phân công nhiệm vụ công việc.
 | Thành viên | Vai trò             | Nhiệm vụ chính            |
