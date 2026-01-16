@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <chrono>   // Thư viện đo thời gian
@@ -17,30 +16,31 @@ class MazeSolver {
 public:
     int n, m; // Số hàng, số cột
     vector<vector<int>> map; // Ma trận mê cung: 0 là đường, 1 là tường
-    vector<Point> path; // Lưu đường đi tìm được
+    vector<Point> path; // Lưu đường đi tìm được (để in ra kết quả)
     Point startPos, endPos;
 
-    // Constructor
+    // Constructor: Khởi tạo
     MazeSolver(int rows, int cols) {
         n = rows;
         m = cols;
-        map.resize(n, vector<int>(m, 1)); // Mặc định toàn tường
+        // Mặc định khởi tạo toàn bộ là tường (1)
+        map.resize(n, vector<int>(m, 1));
         startPos = {0, 0};
         endPos = {n - 1, m - 1};
     }
 
-   
-    // --- KHU VỰC CỦA BẠN (Hàm tiện ích) ---
     void printMap() {
+        // Chỉ in nếu map nhỏ, map to quá in ra sẽ bị vỡ giao diện console
         if (n > 50 || m > 50) {
-            cout << "[Canh bao] Me cung qua lon de hien thi console!" << endl;
+            cout << "[Canh bao] Me cung qua lon (" << n << "x" << m << ") - Khong hien thi Console!" << endl;
             return;
         }
+
         cout << "--- MAP PREVIEW ---" << endl;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (i == startPos.x && j == startPos.y) cout << "S ";
-                else if (i == endPos.x && j == endPos.y) cout << "E ";
+                if (i == startPos.x && j == startPos.y) cout << "S "; // Start
+                else if (i == endPos.x && j == endPos.y) cout << "E "; // End
                 else if (map[i][j] == 1) cout << "# "; // Tường
                 else cout << ". "; // Đường
             }
@@ -49,10 +49,10 @@ public:
     }
 };
 
-// --- HÀM MAIN (Trình điều khiển) ---
+// --- HÀM MAIN (Trình điều khiển - Controller) ---
 int main() {
     int choice;
-    MazeSolver* game = nullptr; // Con trỏ quản lý game
+    MazeSolver* game = nullptr; // Dùng con trỏ để dễ quản lý vòng đời game
 
     while (true) {
         cout << "\n==============================\n";
@@ -74,8 +74,12 @@ int main() {
             cout << "Nhap so hang (Height): "; cin >> h;
             cout << "Nhap so cot (Width): "; cin >> w;
             
-            if (game != nullptr) delete game; // Xóa game cũ nếu có
+            // Xóa game cũ nếu có để tránh Memory Leak
+            if (game != nullptr) delete game; 
+            
             game = new MazeSolver(h, w);
+            
+            // Đo thời gian sinh mê cung (Optional)
             game->generateMaze(); // Gọi code của TV2
             cout << "Sinh me cung thanh cong!\n";
             break;
@@ -87,7 +91,7 @@ int main() {
                 break;
             }
             
-            // ĐO THỜI GIAN CHẠY (Quan trọng cho báo cáo)
+            // --- ĐO THỜI GIAN CHẠY (QUAN TRỌNG ĐỂ LÀM BÁO CÁO) ---
             auto start = high_resolution_clock::now();
             
             bool found = false;
@@ -95,6 +99,7 @@ int main() {
             else found = game->solveBFS();             // Gọi code TV3
 
             auto stop = high_resolution_clock::now();
+            // Tính ra vi giây (microseconds) để chính xác hơn
             auto duration = duration_cast<microseconds>(stop - start);
 
             if (found) cout << ">> Ket qua: TIM THAY DUONG DI!\n";
@@ -112,6 +117,6 @@ int main() {
         }
     }
     
-    if (game) delete game;
+    if (game) delete game; // Dọn dẹp bộ nhớ trước khi thoát
     return 0;
 }
