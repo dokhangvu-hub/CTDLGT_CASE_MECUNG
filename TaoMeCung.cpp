@@ -51,7 +51,7 @@ int main() {
     // Sinh mê cung từ (1,1)
     generateMaze(1, 1);
 
-    // ===== Thêm lối vào & lối thoát =====
+    // Thêm lối vào & lối thoát 
     maze[1][0] = ' ';           // Lối vào (bên trái)
     maze[1][1] = ' ';
 
@@ -68,3 +68,4 @@ int main() {
 
     return 0;
 }
+
