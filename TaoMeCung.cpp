@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -15,14 +14,14 @@ char maze[H][W];
 int dx[4] = {0, 0, 2, -2};
 int dy[4] = {2, -2, 0, 0};
 
-// Kiểm tra ô có hợp lệ để đi tiếp không
+// Kiểm tra ô hợp lệ
 bool valid(int x, int y) {
     return x > 0 && x < H - 1 &&
            y > 0 && y < W - 1 &&
            maze[x][y] == '#';
 }
 
-// Sinh mê cung bằng DFS Backtracking
+// Sinh mê cung DFS Backtracking
 void generateMaze(int x, int y) {
     maze[x][y] = ' ';
 
@@ -49,8 +48,16 @@ int main() {
         for (int j = 0; j < W; j++)
             maze[i][j] = '#';
 
-    // Bắt đầu sinh mê cung từ (1,1)
+    // Sinh mê cung từ (1,1)
     generateMaze(1, 1);
+
+    // ===== Thêm lối vào & lối thoát =====
+    maze[1][0] = ' ';           // Lối vào (bên trái)
+    maze[1][1] = ' ';
+
+    maze[H - 2][W - 1] = ' ';   // Lối thoát (bên phải)
+    maze[H - 2][W - 2] = ' ';
+    // ==================================
 
     // In mê cung
     for (int i = 0; i < H; i++) {
